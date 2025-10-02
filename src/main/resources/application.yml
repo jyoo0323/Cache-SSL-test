@@ -1,0 +1,7 @@
+server:
+  port: 8000
+  ssl:
+    enabled: false
+    key-store: test.pfx
+    key-store-password: 123456
+    key-store-type: PKCS12

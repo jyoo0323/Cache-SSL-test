@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>HTTP Cache Demo</title>
+</head>
+<body>
+<h1>HTTP Cache Demo</h1>
+<button onclick="fetchGreeting()">Fetch Greeting</button>
+<p id="output">Click the button to fetch.</p>
+
+<script>
+    async function fetchGreeting() {
+        try {
+            const response = await fetch("http://localhost:8000/test", {
+                cache: "default" // browser uses HTTP caching rules (ETag, Cache-Control)
+            });
+
+            // If cached and valid, browser serves from cache automatically
+            // If expired, browser revalidates using ETag
+            const text = await response.text();
+            document.getElementById("output").textContent = text;
+
+            console.log("Response headers:", [...response.headers.entries()]);
+        } catch (e) {
+            console.error("Error fetching:", e);
+        }
+    }
+</script>
+</body>
+</html>
